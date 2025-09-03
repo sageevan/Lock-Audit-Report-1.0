@@ -1,0 +1,40 @@
+﻿<Window x:Class="Lock_Audit_Report_1._0.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="Lock Audit Report" Height="500" Width="900">
+
+    <Grid Margin="10">
+        <StackPanel>
+
+            <!-- Top Controls -->
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0,0,0,10">
+
+                <Label Content="Room:" Width="50"/>
+                <TextBox Text="{Binding RoomNumber, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+
+                <Label Content="Start:" Width="50"/>
+                <DatePicker SelectedDate="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}"
+                            Width="120"
+                            DisplayDateEnd="{x:Static sys:DateTime.Today}"/>
+
+                <Label Content="End:" Width="50"/>
+                <DatePicker SelectedDate="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}"
+                            Width="120"
+                            DisplayDateEnd="{x:Static sys:DateTime.Today}"/>
+
+                <Button Content="Load" Command="{Binding LoadCommand}" Margin="5"/>
+                <Button Content="Export PDF" Command="{Binding ExportPdfCommand}" Margin="5"/>
+            </StackPanel>
+
+            <!-- DataGrid for events -->
+            <DataGrid ItemsSource="{Binding Events}" AutoGenerateColumns="True" Height="350"/>
+
+            <!-- Error message -->
+            <TextBlock Text="{Binding ErrorMessage}" 
+                       Foreground="Red" 
+                       Margin="5"
+                       TextWrapping="Wrap"/>
+        </StackPanel>
+    </Grid>
+</Window>
